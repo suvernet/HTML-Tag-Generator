@@ -11,6 +11,8 @@ function generateTag() {
 
     // Формируем HTML-код (добавляем target="_blank" для открытия в новой вкладке)
     const htmlTag = `<a href="${url}" target="_blank">${text}</a>`;
+    const imgTag = `<img src="${imgUrl}" alt="${altText}" width="${width}" height="${height}" />`;
+
 
     // Выводим результат
     resultDiv.innerHTML = htmlTag;
