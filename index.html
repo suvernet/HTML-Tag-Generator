@@ -7,18 +7,38 @@
 <body>
     <h1>Генератор HTML-тегов</h1>
     
-    <!-- Форма ввода -->
+    <!-- Форма ввода 
+    =================================================================
+    создание ссылки
+    -->
     <div>
-        <label>Текст ссылки: <input type="text" id="text" placeholder="Введите текст"></label>
+        <label>Подпись (alt): <input type="text" id="text" placeholder="Введите текст"></label>
     </div>
     <div>
         <label>Адрес ссылки: <input type="text" id="url" placeholder="https://example.com"></label>
     </div>
+        <!-- создание ссылки для картинки -->
+    <div>
+        <label>Адрес картинки: <input type="text" id="imgUrl" placeholder="https://example.com"></label>
+    </div>
+    <div>
+        <label>Подпись (alt): <input type="text" id="altText" placeholder="Введите текст"></label>
+    </div>
+    <div>
+        <label>Ширина: <input type="number" id="width" placeholder="Введите текст"></label>
+    </div>
+    <div>
+        <label>Высота: <input type="number" id="height" placeholder="Введите текст"></label>
+    </div>
     <button id="generate">Сгенерировать тег</button>
+
+    
+
+    
+
 
     <!-- Результат -->
     <div id="result" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9;"></div>
-
     <!-- Подключаем наш скрипт -->
     <script src="tag__generator.js"></script>
 </body>
