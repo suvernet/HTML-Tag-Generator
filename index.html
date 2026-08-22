@@ -2,15 +2,139 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <!-- Исправили viewport: добавили значение 1.0 и закрыли кавычку -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Tag Generator</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Генератор HTML-тегов</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 20px auto; color: #333; }
+        h1 { text-align: center; }
+
+        /* Подсказка */
+        .hint {
+            background: #eef7ff;
+            border: 1px solid #b6d7ff;
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #2c5aa0;
+        }
+
+        /* Переключатель секции */
+        .section-toggle {
+            cursor: pointer;
+            font-weight: bold;
+            margin: 15px 0 5px;
+            color: #2c3e50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-toggle::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s;
+        }
+        .section-toggle.open::after {
+            transform: rotate(180deg);
+        }
+
+        /* Скрытая секция */
+        .form-section {
+            display: none;
+            padding: 12px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .form-section.active { display: block; }
+
+        label { display: block; margin: 8px 0 4px; font-weight: 500; }
+        input, textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Кнопки */
+        button {
+            padding: 10px 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .btn-generate { background: #007bff; color: white; }
+        .btn-clear { background: #dc3545; color: white; margin-left: 10px; }
+
+        /* Результат */
+        .result-block {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+        }
+        #result-code {
+            border: 1px solid #aaa;
+            background: #f4f4f4;
+            white-space: pre;
+            word-wrap: break-word;
+            min-height: 60px;
+        }
+        #result-preview {
+            border: 1px dashed #aaa;
+            padding-bottom: 10px;
+            min-height: 40px;
+        }
+    </style>
 </head>
 <body>
     <h1>Генератор HTML-тегов</h1>
-    <p>Здесь будет интерфейс для генерации тегов.</p>
-    
+
+    <!-- Подсказка -->
+    <div class="hint">
+        🧠 <strong>Как пользоваться:</strong> Раскройте нужные секции, заполните поля и нажмите «Сгенерировать результат». Чтобы очистить всё — нажмите «Очистить».
+    </div>
+
+    <!-- Секция: Ссылка -->
+    <div class="section-toggle" id="toggle-link">🔗 Генерация ссылки (раскрыть)</div>
+    <div class="form-section" id="section-link">
+        <label>Текст ссылки: <input type="text" id="text" placeholder="Например: Читать далее"></label>
+        <label>Адрес ссылки: <input type="text" id="url" placeholder="https://example.com"></label>
+    </div>
+
+    <!-- Секция: Картинка -->
+    <div class="section-toggle" id="toggle-img">🖼️ Генерация картинки (раскрыть)</div>
+    <div class="form-section" id="section-img">
+        <label>Адрес картинки: <input type="text" id="imgUrl" placeholder="https://example.com/image.jpg"></label>
+        <label>Подпись (alt): <input type="text" id="altText" placeholder="Описание картинки"></label>
+        <div style="display:flex; gap:10px;">
+            <label style="flex:1">Ширина: <input type="number" id="width" placeholder="300"></label>
+            <label style="flex:1">Высота: <input type="number" id="height" placeholder="200"></label>
+        </div>
+    </div>
+
+    <!-- Секция: Список -->
+    <div class="section-toggle" id="toggle-list">📋 Генератор списка (раскрыть)</div>
+    <div class="form-section" id="section-list">
+        <label>Элементы списка (через запятую): <textarea id="listText" rows="3" placeholder="Кофе, Чай, Вода, Лимонад"></textarea></label>
+        <label><input type="checkbox" id="isOrdered"> Нумерованный список (ol)</label>
+    </div>
+
+    <!-- Кнопки -->
+    <div style="margin: 20px 0;">
+        <button id="generate-all" class="btn-generate">🧩 Сгенерировать результат</button>
+        <button id="clear-all" class="btn-clear">🗑️ Очистить всё</button>
+    </div>
+
+    <!-- Результат: код -->
+    <div><strong>Код для копирования:</strong></div>
+    <div id="result-code" class="result-block"></div>
+
+    <!-- Результат: превью -->
+    <div><strong>Превью (как будет выглядеть):</strong></div>
+    <div id="result-preview" class="result-block"></div>
+
     <script src="tag__generator.js"></script>
 </body>
 </html>
